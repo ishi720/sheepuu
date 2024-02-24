@@ -1,8 +1,9 @@
 import ddf.minim.*;  // 音を扱うライブラリ
 
+
 Minim minim;
 AudioPlayer bgm;
-AudioSnippet sound;
+AudioPlayer sound;
 
 PImage[] s = new PImage[12];
 PImage bg1, bg2, bg3, bg4;//背景
@@ -44,7 +45,7 @@ void setup() {
 
   minim = new Minim(this);  // 初期化
   bgm = minim.loadFile("nmb008_64.mp3");   // BGM(再生ファイル)の指定
-  sound = minim.loadSnippet("sheep.aif");  // 効果音(再生ファイル)の指定
+  sound = minim.loadFile("sheep.aif");  // 効果音(再生ファイル)の指定
   bgm.loop();  // BGMをループ再生
 
   s_flag=0;
