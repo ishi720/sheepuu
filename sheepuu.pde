@@ -3,21 +3,18 @@ import ddf.minim.*;  // 音を扱うライブラリ
 Minim minim;
 AudioPlayer bgm;
 AudioSnippet sound;
+
 PImage[] s = new PImage[12];
 PImage bg1, bg2, bg3, bg4;//背景
 PImage Sheep1, Sheep2, Sheep3;
 int s_flag;//シーンフラグ
 int m_flag;//クリックフラグ
 int ja_flag;//ジャンプフラグ
-
 int S_size=150;//羊のサイズ
 float SheepX, SheepY;//羊の位置
-
 int count;//カウント
 int bad_count;//バッドカウント
-
 int times=30;
-
 int x, y;
 
 void setup() {
@@ -32,7 +29,6 @@ void setup() {
   Sheep2=loadImage("Sheep2.png");
   Sheep3=loadImage("Sheep3.png");
 
-
   s[0]=loadImage("0.png");
   s[1]=loadImage("1.png");
   s[2]=loadImage("2.png");
@@ -45,9 +41,6 @@ void setup() {
   s[9]=loadImage("9.png");
   s[10]=loadImage("10.png");
   s[11]=loadImage("11.png");
-
-
-
 
   minim = new Minim(this);  // 初期化
   bgm = minim.loadFile("nmb008_64.mp3");   // BGM(再生ファイル)の指定
@@ -68,19 +61,12 @@ void setup() {
 }
 
 void draw() {
-  //println(s_flag);
-  println(m_flag);
-  //println(ja_flag);
-  //println(SheepX);
-
 
   if (s_flag==0) {//スタート画面
     background(bg1);
-    //rect(30, 200, 50, 50);//スタートボタン
-    //rect(230, 200, 50, 50);//説明
+
   } else if (s_flag==1) {//プレイ画面
     background(bg2);
-
     fill(255, 0, 0);
 
     if (bad_count<=0) {
@@ -94,7 +80,6 @@ void draw() {
     }
 
     image(s[10], 280, 10, 50, 50);//匹
-
     image(s[count%10], 240, 10, 50, 50);
     if (count/10>=1) {
       image(s[(count/10)%10], 210, 10, 50, 50);
@@ -106,11 +91,6 @@ void draw() {
       s_flag=2;
     }
 
-
-
-
-    //text(count+"匹", 230, 60);//カウント表示
-
     SheepX += 0.5;
     if (SheepX>=width || SheepY>=height) {//画面外ループ
       SheepX=-100;
@@ -120,11 +100,10 @@ void draw() {
     }
 
     if (ja_flag==0 && SheepX<60 && m_flag==1) {
-
       ja_flag=1;
     }
 
-    if (ja_flag==0 &&  SheepX<=80) {//歩行
+    if (ja_flag==0 && SheepX<=80) {//歩行
       image(Sheep1, SheepX-10, SheepY, S_size, S_size);
     }
     if (ja_flag==0 &&  SheepX>=80) {//落下
@@ -144,7 +123,7 @@ void draw() {
           count+=1;
           bad_count=0;
         }
-      } else {//
+      } else {
         image(Sheep1, SheepX-10, SheepY, S_size, S_size);
       }
     }
@@ -196,12 +175,6 @@ void mousePressed() {
 void mouseReleased() {
   sound.rewind();  // 効果音の頭出し
   sound.play();    // 効果音再生
-  //if (m_flag==1 && s_flag==0 &&  mouseX>=30 && mouseX<=80 && mouseY>=200 && mouseY<=250) {
   m_flag=2;
   s_flag=1;
-  //}
-  //if (m_flag==3 && s_flag==0 &&  mouseX>=230 && mouseX<=280 && mouseY>=200 && mouseY<=250) {
-  //m_flag=2;
-  //s_flag=3;
-  //}
 }
